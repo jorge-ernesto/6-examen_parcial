@@ -1,0 +1,21 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+    <h1>{{title}}</h1>
+    <h4><a class="btn btn-secondary" href="{% url 'index_tareas' %}">Atras</a></h4>
+
+    <!-- Detalle Tarea -->
+    <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+        <div class="card-header">
+            {{ tarea.title }}
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Descripción: {{ tarea.description }}</li>
+            <li class="list-group-item">Fecha de creación: {{ tarea.created_at }}</li>
+            <li class="list-group-item">Fecha de entrega: {{ tarea.delivery_at }}</li>
+            <li class="list-group-item">Usuario: {{ tarea.usuario.first_name }} {{ tarea.usuario.last_name }}</li>
+        </ul>
+    </div>
+{% endblock %}

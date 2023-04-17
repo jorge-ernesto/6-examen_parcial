@@ -1,0 +1,59 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+    <!-- Mensajes Flash -->
+    {% include 'messages/messages.html' %}
+
+    <!-- Formulario de Registro -->
+    <div class="card border-success">
+        <div class="card-header text-center">{{title}}</div>
+        <div class="card-body">
+
+            <form method="POST" action="{% url 'register_action' %}">
+                {% csrf_token %}
+
+                <div class="row mb-3">
+                    <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label>
+                    <div class="col-sm-5">
+                        <input type="input" class="form-control" name="username" placeholder="Ingrese usuario">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="first_name" class="col-sm-2 col-form-label">Nombres</label>
+                    <div class="col-sm-5">
+                        <input type="input" class="form-control" name="first_name" placeholder="Ingrese nombres">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="last_name" class="col-sm-2 col-form-label">Apellidos</label>
+                    <div class="col-sm-5">
+                        <input type="input" class="form-control" name="last_name" placeholder="Ingrese apellidos">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="password1" class="col-sm-2 col-form-label">Contraseña</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" name="password1" placeholder="Ingrese contraseña">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="password2" class="col-sm-2 col-form-label">Contraseña (confirmación)</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" name="password2" placeholder="Ingrese contraseña (confirmación)">
+                    </div>
+                </div>
+
+                <h4>
+                    <button type="submit" name="Registrarse" class="btn btn-lg btn-primary btn-block">Registrarse</button>
+                </h4>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

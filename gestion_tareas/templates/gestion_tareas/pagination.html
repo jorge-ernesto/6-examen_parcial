@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-between">
+    Mostrando {{cantidad_pagina}} de {{cantidad_total}} registros.
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if tareas.has_previous %}
+                <a href="?page=1{{ cadena_buscador }}">&laquo; Primero</a>
+                <a href="?page={{ tareas.previous_page_number }}{{ cadena_buscador }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Pagina {{tareas.number}} de {{tareas.paginator.num_pages}}.
+            </span>
+
+            {% if tareas.has_next %}
+                <a href="?page={{ tareas.next_page_number }}{{ cadena_buscador }}">Siguiente</a>
+                <a href="?page={{ tareas.paginator.num_pages }}{{ cadena_buscador }}">Última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+</div>

@@ -1,0 +1,10 @@
+<!-- Mensajes Flash -->
+<!-- Ver los Mensajes Flash guardados en messages -->
+<!-- De este modo podemos recorrer y ver el contenido de todos los strings guardados en messages, el contenido del mensaje se almacena como un string -->
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+            {{message}}
+        </div>
+    {% endfor %}
+{% endif %}

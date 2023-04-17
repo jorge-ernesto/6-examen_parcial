@@ -1,0 +1,38 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+    <!-- Mensajes Flash -->
+    {% include 'messages/messages.html' %}
+
+    <!-- Formulario de Login -->
+    <div class="card border-success">
+        <div class="card-header text-center">{{title}}</div>
+        <div class="card-body">
+
+            <form method="POST" action="{% url 'login_action' %}">
+                {% csrf_token %}
+
+                <div class="row mb-3">
+                    <label for="username" class="col-sm-2 col-form-label">Usuario</label>
+                    <div class="col-sm-5">
+                        <input type="input" class="form-control" name="username" placeholder="Usuario">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                    </div>
+                </div>
+
+                <h4>
+                    <button type="submit" name="Login" class="btn btn-lg btn-primary btn-block">Login</button>
+                </h4>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

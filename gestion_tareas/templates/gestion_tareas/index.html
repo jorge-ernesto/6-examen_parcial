@@ -1,0 +1,68 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+    <h1>{{title}}</h1>
+    <h4><a class="btn btn-success" href="{% url 'create_tarea' %}">Crear Tarea</a></h4>
+
+    <!-- Mensajes Flash -->
+    {% if messages %}
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Listado de Tareas -->
+    <div id="listadoRegistros">
+        <div class="card border-success mb-3">
+            <div class="card-header">Tareas</div>
+            <div class="card-body">
+
+                <!-- Buscador -->
+                <form method="GET" action="{% url 'index_tareas' %}">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="searchtext" placeholder="Usuario" value="">
+                        <button type="submit" class="btn btn-success">Buscar</button>
+                    </div>
+                </form>
+
+                <!-- Tabla -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Titulo</th>
+                                <th>Usuario</th>
+                                <th>Creado el</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tarea in tareas %}
+                                <tr>
+                                    <td>{{tarea.id}}</td>
+                                    <td>{{tarea.title}}</td>
+                                    <td>{{tarea.usuario.first_name}} {{tarea.usuario.last_name}}</td>
+                                    <td>{{tarea.created_at}}</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-success" href="{% url 'view_tarea' tarea.id %}">Ver</a>
+                                        <a class="btn btn-sm btn-warning" href="{% url 'delete_tarea' tarea.id %}" onclick="return confirm('¿Desea eliminar la tarea?')">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginacion -->
+                {% include 'gestion_tareas/pagination.html' %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

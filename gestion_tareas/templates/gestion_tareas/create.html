@@ -1,0 +1,58 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+    <h1>{{title}}</h1>
+
+    <!-- Estilo para error devuelto por FormTarea -->
+    <style>
+        .errorlist {
+            margin-bottom: 0px;
+        }
+    </style>
+
+    <!-- Mensajes Flash -->
+    {% include 'messages/messages.html' %}
+
+    <!-- Formulario para crear tareas -->
+    <div id="formularioRegistros">
+        <div class="card text-bg-light mb-3 border-success">
+            <div class="card-header">Tareas</div>
+            <div class="card-body">
+
+                <form method="POST" action="{% url 'save_tarea' %}">
+                    {% csrf_token %}
+
+                    <div class="row mb-3">
+                        <label for="title" class="col-sm-2 col-form-label">Titulo</label>
+                        <div class="col-sm-5">
+                            <input type="input" class="form-control" name="title" placeholder="Ingrese titulo">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="description" class="col-sm-2 col-form-label">Descripción</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" name="description" placeholder="Ingrese descripción" rows=3></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="delivery_at" class="col-sm-2 col-form-label">Entregado el:</label>
+                        <div class="col-sm-5">
+                            <input type="datetime-local" class="form-control" name="delivery_at" placeholder="Ingrese fecha">
+                        </div>
+                    </div>
+
+                    <h4>
+                        <button type="submit" name="Crear" class="btn btn-success">Crear Tarea</button>
+                        <a class="btn btn-secondary" href="{% url 'index_tareas' %}">Atras</a>
+                    </h4>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
